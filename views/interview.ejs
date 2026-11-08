@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Your Interview | MockMate AI</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <nav class="nav"><a class="brand" href="/">MockMate<span>AI</span></a><span class="nav-link">Interview in
+            progress</span></nav>
+    <main class="content">
+        <div class="badge">
+            <%= role %> · <%= difficulty %>
+        </div>
+        <h1 class="page-title">Your <span>interview</span></h1>
+        <p class="muted">Answer each question. Gemini will evaluate your responses.</p>
+        <form action="/interviews/submit" method="POST">
+            <input type="hidden" name="role" value="<%= role %>"><input type="hidden" name="difficulty"
+                value="<%= difficulty %>">
+            <% questions.forEach((question,index)=>{ %><section class="panel question-card">
+                    <div class="question-top"><span class="question-number">QUESTION <%= String(index+1).padStart(2,"0")
+                                %></span><span class="muted">
+                            <%= index+1 %> / <%= questions.length %>
+                        </span></div>
+                    <h2>
+                        <%= question %>
+                    </h2><input type="hidden" name="questions" value="<%= question %>">
+                    <label for="answer-<%= index %>">Your answer</label><textarea id="answer-<%= index %>"
+                        name="answers" rows="5" maxlength="5000" placeholder="Write your answer here..."
+                        required></textarea>
+                </section>
+                <% }) %>
+                    <button class="button full" type="submit">Submit answers for AI evaluation →</button>
+        </form>
+    </main>
+    <script>document.querySelectorAll("form").forEach(f => f.addEventListener("submit", () => { const b = f.querySelector("button[type=submit]"); if (b) { b.disabled = true; b.textContent = "Evaluating your answers… (up to 60 seconds)"; } }));</script>
+</body>
+
+</html>

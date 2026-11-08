@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Interview Results | MockMate AI</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <nav class="nav"><a class="brand" href="/">MockMate<span>AI</span></a><a href="/interview/setup"
+            class="nav-link">New interview</a></nav>
+    <main class="content">
+        <div class="badge">INTERVIEW COMPLETED · <%= role %>
+        </div>
+        <h1 class="page-title">Your <span>results</span></h1>
+        <section class="panel score-panel">
+            <div>
+                <div class="muted">OVERALL SCORE</div>
+                <div class="score">
+                    <%= evaluation.overallScore %><small>/100</small>
+                </div>
+            </div>
+            <div class="score-summary">
+                <h2>AI performance summary</h2>
+                <p>
+                    <%= evaluation.summary %>
+                </p>
+            </div>
+        </section>
+        <div class="two-col">
+            <section class="panel">
+                <h2>Strengths</h2>
+                <ul>
+                    <% (evaluation.strengths||[]).forEach(x=>{ %><li>
+                            <%= x %>
+                        </li>
+                        <% }) %>
+                </ul>
+            </section>
+            <section class="panel">
+                <h2>Areas to improve</h2>
+                <ul>
+                    <% (evaluation.improvements||[]).forEach(x=>{ %><li>
+                            <%= x %>
+                        </li>
+                        <% }) %>
+                </ul>
+            </section>
+        </div>
+        <h2 class="section-heading">Question-by-question feedback</h2>
+        <% evaluation.questionFeedback.forEach((item,index)=>{ %><section class="panel feedback-card">
+                <div class="question-top"><span class="question-number">QUESTION <%= index+1 %></span><span
+                        class="score-pill">
+                        <%= item.score %>/100
+                    </span></div>
+                <h2>
+                    <%= questions[index] %>
+                </h2>
+                <div class="answer-box"><b>Your answer</b>
+                    <p>
+                        <%= answers[index]||"No answer provided." %>
+                    </p>
+                </div>
+                <div class="two-col compact">
+                    <div><b>Points covered</b>
+                        <ul>
+                            <% (item.coveredPoints||[]).forEach(s=>{ %><li>
+                                    <%= s %>
+                                </li>
+                                <% }) %>
+                        </ul>
+                    </div>
+                    <div><b>Points missed</b>
+                        <ul>
+                            <% (item.missedPoints||[]).forEach(s=>{ %><li>
+                                    <%= s %>
+                                </li>
+                                <% }) %>
+                        </ul>
+                    </div>
+                </div>
+                <p><b>Assessment:</b>
+                    <%= item.correctness %>
+                </p>
+                <p><b>Feedback:</b>
+                    <%= item.feedback %>
+                </p>
+                <div class="two-col compact">
+                    <div><b>What you did well</b>
+                        <ul>
+                            <% (item.strengths||[]).forEach(s=>{ %><li>
+                                    <%= s %>
+                                </li>
+                                <% }) %>
+                        </ul>
+                    </div>
+                    <div><b>How to improve</b>
+                        <ul>
+                            <% (item.improvements||[]).forEach(s=>{ %><li>
+                                    <%= s %>
+                                </li>
+                                <% }) %>
+                        </ul>
+                    </div>
+                </div>
+                <div class="ideal"><b>Ideal answer</b>
+                    <p>
+                        <%= item.idealAnswer %>
+                    </p>
+                </div>
+            </section>
+            <% }) %>
+                <a class="button full" href="/interview/setup">Start another interview →</a>
+    </main>
+</body>
+
+</html>

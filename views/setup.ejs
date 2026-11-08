@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Interview Setup | MockMate AI</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <nav class="nav"><a class="brand" href="/">MockMate<span>AI</span></a><a href="/" class="nav-link">Home</a></nav>
+    <main class="narrow">
+        <div class="badge">LET'S GET STARTED</div>
+        <h1 class="page-title">Set up your <span>interview</span></h1>
+        <p class="muted">Choose your target role and let Gemini prepare your interview.</p>
+        <form class="panel form" action="/interviews/start" method="POST">
+            <label for="role">Interview role</label><select id="role" name="role" required>
+                <option>Full Stack Developer</option>
+                <option>JavaScript Developer</option>
+                <option>Python Developer</option>
+                <option>Java Developer</option>
+                <option>Frontend Developer</option>
+                <option>Backend Developer</option>
+            </select>
+            <label for="difficulty">Difficulty</label><select id="difficulty" name="difficulty" required>
+                <option>Beginner</option>
+                <option selected>Intermediate</option>
+                <option>Advanced</option>
+            </select>
+            <label for="questionCount">Number of questions</label><select id="questionCount" name="questionCount"
+                required>
+                <option value="5" selected>5 Questions</option>
+                <option value="10">10 Questions</option>
+            </select>
+            <button class="button full" type="submit">Generate interview questions →</button>
+        </form>
+    </main>
+    <script>document.querySelectorAll("form").forEach(f => f.addEventListener("submit", () => { const b = f.querySelector("button[type=submit]"); if (b) { b.disabled = true; b.textContent = "Generating questions… (up to 30 seconds)"; } }));</script>
+</body>
+
+</html>

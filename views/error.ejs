@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>
+        <%= title %> | MockMate AI
+    </title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <nav class="nav"><a class="brand" href="/">MockMate<span>AI</span></a></nav>
+    <main class="narrow">
+        <section class="panel error-panel">
+            <div class="badge">SOMETHING WENT WRONG</div>
+            <h1>
+                <%= title %>
+            </h1>
+            <p>
+                <%= message %>
+            </p><a class="button" href="<%= backUrl %>">Try again →</a>
+        </section>
+    </main>
+</body>
+
+</html>
